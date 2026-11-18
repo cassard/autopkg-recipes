@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads the universal Superhuman Docs disk image, verifies the app signature, and reads the version and build from the app bundle.</string>
+    <key>Identifier</key>
+    <string>com.github.cassard.download.SuperhumanDocs</string>
+    <key>MinimumVersion</key>
+    <string>2.3</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>SuperhumanDocs</string>
+        <key>APP_FILENAME</key>
+        <string>Superhuman Docs.app</string>
+        <key>DOWNLOAD_URL</key>
+        <string>https://docs-desktop.superhuman.com/releases/Superhuman-Docs-universal.dmg</string>
+    </dict>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Processor</key>
+            <string>URLDownloader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>%DOWNLOAD_URL%</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>EndOfCheckPhase</string>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>CodeSignatureVerifier</string>
+            <key>Arguments</key>
+            <dict>
+                <key>input_path</key>
+                <string>%pathname%/%APP_FILENAME%</string>
+                <key>requirement</key>
+                <string>identifier "com.superhuman.CodaApp.Desktop" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] and certificate leaf[field.1.2.840.113635.100.6.1.13] and certificate leaf[subject.OU] = "W8F64X92K3"</string>
+                <key>strict_verification</key>
+                <true/>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>PlistReader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>info_path</key>
+                <string>%pathname%/%APP_FILENAME%/Contents/Info.plist</string>
+                <key>plist_keys</key>
+                <dict>
+                    <key>CFBundleShortVersionString</key>
+                    <string>version</string>
+                    <key>CFBundleVersion</key>
+                    <string>build</string>
+                </dict>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>Description</key>
-    <string>Downloads the universal Superhuman Docs disk image, verifies the app signature, and reads the version and build from the app bundle.</string>
+    <string>Downloads the universal Superhuman Docs disk image, verifies the app signature, and reads the version from the app bundle.</string>
     <key>Identifier</key>
     <string>com.github.cassard.download.SuperhumanDocs</string>
     <key>MinimumVersion</key>
@@ -56,8 +56,6 @@
                 <dict>
                     <key>CFBundleShortVersionString</key>
                     <string>version</string>
-                    <key>CFBundleVersion</key>
-                    <string>build</string>
                 </dict>
             </dict>
         </dict>

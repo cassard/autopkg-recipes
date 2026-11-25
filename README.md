@@ -4,6 +4,7 @@ AutoPkg recipes, mainly for Munki.
 
 | Application | Recipes |
 |---|---|
+| Claap | download, munki |
 | Superhuman Docs (formerly Coda) | download, munki |
 
 ## AI use
